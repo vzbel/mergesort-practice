@@ -40,7 +40,46 @@ public class Main {
         // Repeat the process to break down and merge the right subtree.
         mergeSort(rightArray);
         // Merge each array pair.
-        merge(array, leftArray, rightArray);
+        return merge(array, leftArray, rightArray);
     }
 
+    // Merge two arrays
+    public static int[] merge(int[] array, int[] leftArray, int[] rightArray) {
+        // Keep counters for each array's current position.
+        int i = 0; // array
+        int l = 0; // leftArray
+        int r = 0; // rightArray
+
+        // Merge until left or right array is fully copied into the original array.
+        // Each time, compare values to see which moves first.
+        // Then, increment counters to proceed.
+        while ((l < leftArray.length) && (r < rightArray.length)) {
+            // Check if the left value is lesser, in which case it must go first.
+            if (leftArray[l] < rightArray[r]) {
+                array[i] = leftArray[l];
+                i++;
+                l++;
+            } else { // Otherwise the right value is lesser or equal to l.
+                array[i] = rightArray[r];
+                i++;
+                r++;
+            }
+        }
+
+        // Once the previous loop has terminated, one array can still contain values.
+        // We must transfer them as well.
+        while (l < leftArray.length) {
+            array[i] = leftArray[l];
+            i++;
+            l++;
+        }
+        while (r < rightArray.length) {
+            array[i] = rightArray[r];
+            i++;
+            r++;
+        }
+
+        // Return the merged array
+        return array;
+    }
 }
