@@ -1,6 +1,14 @@
+import java.util.Arrays;
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-
+        int[] arr = new int[59812];
+        Random random = new Random();
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = random.nextInt(402);
+        }
+        System.out.println(Arrays.toString(mergeSort(arr)));
     }
 
     public static int[] mergeSort(int[] array) {
@@ -14,12 +22,12 @@ public class Main {
         // Calculate the middle of the array.
         int middle = array.length / 2;
 
-        // The leftArray will contain values [0, middle]
-        int[] leftArray = new int[middle + 1];
+        // The leftArray will contain values [0, middle - 1]
+        int[] leftArray = new int[middle];
 
-        // The rightArray will contain values [middle + 1, array.length - 1]
+        // The rightArray will contain values [middle, array.length - 1]
         // Length = The amount of space remaining that is not being used by leftArray.
-        int[] rightArray = new int[array.length - leftArray.length];
+        int[] rightArray = new int[array.length - middle];
 
         // Clone all values from the original array into the subarrays.
         // j counts the current index in rightArray.
@@ -27,7 +35,7 @@ public class Main {
         int j = 0;
         for (int i = 0; i < array.length; i++) {
             // First, fill the left array.
-            if (i <= middle) {
+            if (i < middle) {
                 leftArray[i] = array[i];
             } else { // Then, fill the right array.
                 rightArray[j] = array[i];
